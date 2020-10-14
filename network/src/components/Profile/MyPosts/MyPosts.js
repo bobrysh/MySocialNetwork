@@ -8,12 +8,27 @@ const MyPosts = (props) => {
     post => <Post message={post.message} likes={post.likes}/>
   )
 
+  let newPostElement = React.createRef();
+
+  let addPost = () => {
+    props.addPost()
+  }
+
+  let deletePost = () => {
+    return alert('Post Deleted')
+  }
+
+  let onPostChange = () => {
+    let text = newPostElement.current.value;
+    props.updateNewPost(text);
+  }
+
   return (
     <div className={classes.block}>
       <div className={classes.profile}>
-      <div><textarea></textarea></div>
-      <div><button>Add Post</button></div>
-      <div><button>Remove</button></div>
+      <div><textarea onChange={onPostChange} ref={newPostElement} value={props.postText} /></div>
+      <div><button onClick={addPost}>Add Post</button></div>
+      <div><button onClick={deletePost}>Remove</button></div>
     </div>
       {postsElement}
     </div>
